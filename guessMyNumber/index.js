@@ -10,18 +10,16 @@ function handleCheckClick() {
 		document.querySelector(".message").textContent =
 			"⛔️ Please enter a number to start .";
 	} else if (guess === secretNumber) {
+		highestScore = score > highestScore ? score : highestScore;
+		document.querySelector(".number").textContent = secretNumber;
+		document.querySelector(".highscore").textContent = highestScore;
+		document.querySelector(".message").textContent = "✅ Bingo .";
 		document.querySelector("body").style.backgroundColor = "#60b347";
 		document.querySelector(".number").style.width = "30rem";
-		document.querySelector(".number").textContent = secretNumber;
-        document.querySelector(".message").textContent = "✅ Bingo .";
-        score > highestScore
-		? (document.querySelector(".highscore").textContent = score)
-		: (document.querySelector(".highscore").textContent = highestScore);
-	} else if (guess > secretNumber) {
-		document.querySelector(".message").textContent = "⛔️ Guess is too high .";
-		score--;
-	} else if (guess < secretNumber) {
-		document.querySelector(".message").textContent = "⛔️ Guess is too low .";
+	} else if (guess !== secretNumber) {
+		document.querySelector(".message").textContent = `⛔️ Guess is too ${
+			guess > secretNumber ? "high" : "low"
+		} .`;
 		score--;
 	}
 	if (score <= 0) {
@@ -32,12 +30,12 @@ function handleCheckClick() {
 }
 
 function handleAgainClick() {
-    score = 20
-    secretNumber = Math.trunc(Math.random() * 20) + 1;
-    document.querySelector(".score").textContent=score
-    document.querySelector(".number").textContent = "?";
-    document.querySelector(".message").textContent="Start guessing..."
-	document.querySelector(".guess").value = '';
+	score = 20;
+	secretNumber = Math.trunc(Math.random() * 20) + 1;
+	document.querySelector(".score").textContent = score;
+	document.querySelector(".number").textContent = "?";
+	document.querySelector(".message").textContent = "Start guessing...";
+	document.querySelector(".guess").value = "";
 	document.querySelector("body").style.backgroundColor = "#222";
 	document.querySelector(".number").style.width = "15rem";
 }
